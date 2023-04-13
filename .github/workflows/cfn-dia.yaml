@@ -1,0 +1,16 @@
+name: cfn-dia
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  cfn-dia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup cfn-dia
+        run: npm i -g @mhlabs/cfn-diagram
+      - name: Run cfn-dia
+        run: cfn-dia mermaid -t VPC_With_Managed_NAT_And_Private_Subnet.yaml >> ${GITHUB_STEP_SUMMARY}
